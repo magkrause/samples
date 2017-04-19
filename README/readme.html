@@ -1,0 +1,341 @@
+<head>
+<style>
+td    {padding: 10px;}
+body {font-size: large;}
+table {font-size: large;}
+</style>
+</head>
+<body>
+<h1>msg-server</h1>
+msg-server is a sample server containing two endpoints to submit and list messages. <br> 
+For the purpose of this task, persistence is done in memory and stored results will be lost on restart. However, msg-server is prepared to easily plug in any other persistence mechanism.
+
+<h3>Requirements</h3>
+- Java v1.8
+<br>- Maven (Used v3.3.3)
+
+<h3>To build</h3>
+- Standing on the root of msg-server run: <b>mvn clean install</b>
+
+<h3>To run</h3>
+- Standing on the root of msg-server run: <b>mvn spring-boot:run</b>
+
+<h2>Endpoints</h2>
+<h3>Submit</h3>
+The /submit endpoint receives an input string and returns another string that follows the pattern: "$message from $country!" where $message is the input string and $country is the name of the country where the request comes from.
+
+
+<h4>POST /submit</h4>
+<table  border="1">
+<tr>
+<td>
+Resource URL
+</td>
+<td>
+http://localhost:8080/v1/message/submit/
+</td>
+</tr>
+
+<tr>
+<td>
+Response format
+</td>
+<td>
+JSON
+</td>
+</tr>
+
+<tr>
+<td>
+Parameter: input
+</td>
+<td>
+Input string to be stored.
+</td>
+</tr>
+
+<tr>
+<td>
+Sample request
+</td>
+<td>
+http://localhost:8080/v1/message/submit/Hello, good morning
+</td>
+</tr>
+<tr>
+
+<td>
+Sample response
+</td>
+<td>
+{
+  "code": 200,
+  "errorMessage": null,
+  "response": {
+    "id": 0,
+    "creationDate": "Sun Oct 23 23:59:16 GMT-03:00 2016",
+    "lang": "en",
+    "message": "Hello, good morning from Argentina!"
+  }
+}
+</td>
+</tr>
+
+</table>
+
+
+<h3>List</h3>
+The /list endpoint returns the list of messages the server received through endpoint /submit.
+
+<h4>GET /list</h4>
+<table  border="1">
+<tr>
+<td>
+Resource URL
+</td>
+<td>
+http://localhost:8080/v1/message/list
+</td>
+</tr>
+
+<tr>
+<td>
+Response format
+</td>
+<td>
+JSON
+</td>
+</tr>
+
+<tr>
+<td>
+Parameter: numOf
+</td>
+<td>
+Integer that specifies the amount of messages to return.
+</td>
+</tr>
+
+<tr>
+<td>
+Parameter: lang
+</td>
+<td>
+String code that specifies the language of the messages to return. Accepted codes are: <br> 
+		all All languages
+	    aa	Afar
+		ab	Abkhazian
+		af	Afrikaans 
+		ak	Akan,
+		am	Amharic,
+		ar	Arabic
+		as	Assamese
+		ay	Aymara
+		az	Azerbaijani
+		ba	Bashkir
+		be	Belarusian
+		bg	Bulgarian
+		bh	Bihari
+		bi	Bislama
+		bn	Bengali
+		bo	Tibetan
+		br	Breton
+		bs	Bosnian
+		ca	Catalan
+		ceb	Cebuano
+		chr	Cherokee
+		co	Corsican
+		crs	Seselwa
+		cs	Czech
+		cy	Welsh
+		da	Danish
+		de	German
+		dv	Dhivehi
+		dz	Dzongkha
+		el	Greek
+		en	English
+		eo	Esperanto
+		es	Spanish
+		et	Estonian
+		eu	Basque
+		fa	Persian
+		fi	Finnish
+		fj	Fijian
+		fo	Faroese
+		fr	French
+		fy	Frisian
+		ga	Irish
+		gd	Scots Gaelic
+		gl	Galician
+		gn	Guarani
+		gu	Gujarati
+		gv	Manx
+		ha	Hausa
+		haw	Hawaiian
+		hi	Hindi
+		hmn	Hmong
+		hr	Croatian
+		ht	Haitian Creole
+		hu	Hungarian
+		hy	Armenian
+		ia	Interlingua
+		id	Indonesian
+		ie	Interlingue
+		ig	Igbo
+		ik	Inupiak
+		is	Icelandic
+		it	Italian
+		iu	Inuktitut
+		iw	Hebrew
+		ja	Japanese
+		jw	Javanese
+		ka	Georgian
+		kha	Khasi
+		kk	Kazakh
+		kl	Greenlandic
+		km	Khmer
+		kn	Kannada
+		ko	Korean
+		ks	Kashmiri
+		ku	Kurdish
+		ky	Kyrgyz
+		la	Latin
+		lb	Luxembourgish
+		lg	Ganda
+		lif	Limbu
+		ln	Lingala
+		lo	Laothian
+		lt	Lithuanian
+		lv	Latvian
+		mfe	Mauritian Creole
+		mg	Malagasy
+		mi	Maori
+		mk	Macedonian
+		ml	Malayalam
+		mn	Mongolian
+		mr	Marathi
+		ms	Malay
+		mt	Maltese
+		my	Burmese
+		na	Nauru
+		ne	Nepali
+		nl	Dutch
+		no	Norwegian
+		nr	Ndebele
+		nso	Pedi
+		ny	Nyanja
+		oc	Occitan
+		om	Oromo
+		or	Oriya
+		pa	Punjabi
+		pl	Polish
+		ps	Pashto
+		pt	Portuguese
+		qu	Quechua
+		rm	Rhaeto Romance
+		rn	Rundi
+		ro	Romanian
+		ru	Russian
+		rw	Kinyarwanda
+		sa	Sanskrit
+		sco	Scots
+		sd	Sindhi
+		sg	Sango
+		si	Sinhalese
+		sk	Slovak
+		sl	Slovenian
+		sm	Samoan
+		sn	Shona
+		so	Somali
+		sq	Albanian
+		sr	Serbian
+		ss	Siswant
+		st	Sesotho
+		su	Sundanese
+		sv	Swedish
+		sw	Swahili
+		syr	Syriac
+		ta	Tamil
+		te	Telugu
+		tg	Tajik
+		th	Thai
+		ti	Tigrinya
+		tk	Turkmen
+		tl	Tagalog
+		tn	Tswana
+		to	Tonga
+		tr	Turkish
+		ts	Tsonga
+		tt	Tatar
+		ug	Uighur
+		uk	Ukrainian
+		ur	Urdu
+		uz	Uzbek
+		ve	Venda
+		vi	Vietnamese
+		vo	Volapuk
+		war	Waray Philippines
+		wo	Wolof
+		xh	Xhosa
+		yi	Yiddish
+		yo	Yoruba
+		za	Zhuang
+		zh	Chinese
+		zh-Hant	Chineset
+		zu	Zulu
+</td>
+</tr>
+
+<tr>
+<td>
+Sample request
+</td>
+<td>
+http://localhost:8080/v1/message/list?numOf=2&lang=all
+</td>
+</tr>
+<tr>
+
+<td>
+Sample response
+</td>
+<td>
+{
+  "code": 200,
+  "errorMessage": null,
+  "response": [
+    {
+      "id": 1,
+      "creationDate": "Mon Oct 24 00:05:33 GMT-03:00 2016",
+      "lang": "es",
+      "message": "Hola, buen dia from Argentina!"
+    },
+    {
+      "id": 0,
+      "creationDate": "Sun Oct 23 23:59:16 GMT-03:00 2016",
+      "lang": "en",
+      "message": "Hello, good morning from United States!"
+    }
+  ]
+}
+}
+</td>
+</tr>
+</table>
+
+<h2>External services</h2>
+msg-server uses two external services:
+<br>- freegeoip: To identify location given an ip address. http://freegeoip.net
+<br>- detectlanguage: To identify the language of a given string. https://detectlanguage.com/
+<br>
+<br>Both services required information is configured in: msg-server\src\main\resources\config.properties file.
+
+<h2>Class diagram</h2>
+<img src="class-diagram.png"/>
+
+<h2>Sequence diagrams</h2>
+<h3>Submit</h3>
+<img src="seq-diagram-submit.png"/>
+<h3>List</h3>
+<img src="seq-diagram-list.png"/>
+</body>
